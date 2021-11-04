@@ -14,7 +14,11 @@ import java.util.List;
 
 @ControllerAdvice
 public class ErrorHandlerController {
-
+    /**
+     * Metodo el cual se invoca para poner las execpciones en el servicio de la lista SE
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(ListaSeException.class)
     protected ResponseEntity<?> handle(ListaSeException ex){
         String message = ex.getMessage();

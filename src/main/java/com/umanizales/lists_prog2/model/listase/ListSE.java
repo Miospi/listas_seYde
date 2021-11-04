@@ -451,6 +451,12 @@ public class ListSE {
         }
     }
 
+    /**
+     * Metodo que muestra todos los hombres que estan en la lista
+     * @param gender
+     * @return
+     * @throws ListaSeException
+     */
     public ListSE getListSeBoysByGender(String gender) throws ListaSeException {
         validateListEmpty();
         /**
@@ -458,11 +464,28 @@ public class ListSE {
          * LLamo a un ayudante y lo ubico en la cabeza o inicio
          */
         Node temp = this.head;
+        /**
+         * Se crea una lista nueva en la cual se va agragar la lista de generos
+         */
         ListSE listTemp = new ListSE();
+        /**
+         * Creo un ciclo para recorrer la lista SE de principio a fin
+         * llego al final cuando mi ayudante queda para en vacío (null)
+         */
         while (temp != null) {
+            /**
+             * condicional el cual el ayudante saca informacion del
+             * genero, datos, nombre....
+             */
             if (temp.getData().getGender().name().equals(gender)) {
+                /**
+                 * se añaden los datos a la lista
+                 */
                 listTemp.add(temp.getData());
             }
+            /**
+             * El ayudante queda en el final
+             */
             temp = temp.getNext();
         }
         return listTemp;
@@ -493,14 +516,34 @@ public class ListSE {
     }
 
 
-    ///Método que recibe el código de una ciudad y retorna la cantidad de niños
+
+    /**
+     * Método que recibe el código de una ciudad y retorna la cantidad de niños
+     */
     public int getCountBoysByLocation(String code) {
+        /**
+         * El ayudante llega a la cabeza y la extrae
+         */
         Node temp = this.getHead();
+        /**
+         * el cotador empieza en 0
+         */
         int count = 0;
+        /**
+         * Creo un ciclo para recorrer la lista SE de principio a fin
+         * llego al final cuando mi ayudante queda para en vacío (null)
+         */
         while (temp != null) {
+            /**
+             * Condicianal el cual saca los datos de ciudaad que se pidieron y
+             * retorna al contador
+             */
             if (temp.getData().getLocation().getCode().equals(code)) {
                 count++;
             }
+            /**
+             * El ayudante pasa al siguiente
+             */
             temp = temp.getNext();
         }
         return count;
