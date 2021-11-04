@@ -1,15 +1,16 @@
-//paquete.
+
 package com.umanizales.lists_prog2.controller.dto;
-//importe
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-//datos
+
+/**
+ * Clase de constructor la cual crea un menssage de errores par a la listaSE
+ */
 @Data
 @AllArgsConstructor
-//clase pública
+
 public class ErrorDTO {
-    //Sí
     private int code;
-    ////Non.
     private String message;
 }

@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Constructor de las respuestas de para el servicio de la listaSE
+ */
 @Data
 @AllArgsConstructor
 public class ResponseDTO {
