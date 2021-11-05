@@ -453,6 +453,7 @@ public class ListSE {
 
     /**
      * Metodo que muestra todos los hombres que estan en la lista
+     *
      * @param gender
      * @return
      * @throws ListaSeException
@@ -492,29 +493,63 @@ public class ListSE {
     }
 
     public void variantBoys() throws ListaSeException {
+        /**
+         * Se invoca al metodfo para indicar si lka liista no esta vacia
+         */
         validateListEmpty();
+        /**
+         * se toma la lista de los infante para luego llamar el metdo generp
+         */
         ListSE kids = this.getListSeBoysByGender("MASCULINO");
+        /**
+         * se toma la lista de los infantes para luego llamra el metodo genero
+         */
         ListSE girls = this.getListSeBoysByGender("FEMENINO");
+        /**
+         * iniciamos variables  para tener menos infnates, al igual que se pone un maximo
+         */
         ListSE minList = null;
         ListSE maxList = null;
+        /**
+         * se crea una condiccion para saber si hay mas infantes M o F
+         */
         if (kids.getCount() > girls.getCount()) {
             minList = girls;
             maxList = kids;
+            /**
+             * se crea una exception, por si hay mas infantes M de f qeu los cambie
+             */
         } else {
             minList = kids;
             maxList = girls;
         }
         Node temp = minList.getHead();
         int pos = 2;
+        /**
+         * Creo un ciclo para recorrer la lista SE de principio a fin
+         * llego al final cuando mi ayudante ya quede parado en el ultimo niño antes del null
+         */
         while (temp != null) {
+            /**
+             * tomamos la lista mayor y llamamos al adicionar por posicion, le damos el dato que tiene nuestro
+             * ayudante y la posicion que inicializamos en 2
+             */
             maxList.addByPosition(temp.getData(), pos);
+            /**
+             * le decimos a la posicion que se incremente de 2 en 2 para poder que quede intercalado
+             */
             pos = pos + 2;
+            /**
+             * el ayudante cambia al siguiente node
+             */
             temp = temp.getNext();
         }
+        /**
+         * la lista mayor la tiene la cabeza
+         */
         this.head = maxList.getHead();
 
     }
-
 
 
     /**
@@ -550,5 +585,17 @@ public class ListSE {
 
     }
 
+    public Boy searchXposition(int position) {
+        if (this.head != null) {
+            Node temp = this.head;
+            int cont = 1;
+            while (position != cont) {
+                temp = temp.getNext();
+                count++;
+            }
+            return temp.getData();
+        }
+        return null;
+    }
 }
 
