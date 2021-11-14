@@ -26,7 +26,7 @@ public class ListaDeService {
         locations = new ArrayList<>();
         locations.add(new Location("1002635010", "Manizales"));
         locations.add(new Location("1002635011", "Chinchina"));
-        locations.add(new Location("1002635012", "Pereira"));
+        locations.add(new Location("1002635013", "Villa Maria"));
     }
 
     public boolean validateLocation(Location location) {
@@ -47,13 +47,24 @@ public class ListaDeService {
         return new ResponseEntity<>(
                 new ResponseDTO("Niño adicionado", true, null),
                 HttpStatus.OK);
-
-        public ResponseEntity<ResponseDTO> addToStart(Boy boy) throws ListaDeException{
-            // se llama el metodo agregar al inicio y se le envia la data del niño
-            listBoys.addTostart(boy);
-            // hubo coexion con el sistema
-            return new ResponseEntity<>(new ResponseDTO("Niño Adicionado", true, null), HttpStatus.OK);
-        }
-
     }
+
+
+    public ResponseEntity<ResponseDTO> listBoysorderLocation() throws ListaDeException {
+        ListaDE listaTemp = new ListaDE();
+        for (Location loc : locations) {
+            ListaDE listaLoc = listBoys.listaDEByLocation(loc);
+            if (this.listBoys != null) {
+                listaTemp.addNode(listBoys.getHead());
+            }
+        }
+        return new ResponseEntity<>(
+                new ResponseDTO("Listado", listaTemp, null),
+                HttpStatus.OK);
+    }
+
+
+}
+
+
 }

@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
  * Clase para almacenar la información referente a un niño
  * Maneja campos obligatorios para (identificación, edad, ...
  * @autor Carlos Loaiza
- * @author Lucas López
+ * @author
  * @version 1.0 - 30-oct-2021
  *
  */

@@ -1,6 +1,7 @@
 package com.umanizales.lists_prog2.model.listade;
 
 import com.umanizales.lists_prog2.exception.ListaDeException;
+import com.umanizales.lists_prog2.model.Location;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.umanizales.lists_prog2.model.Boy;
@@ -23,19 +24,14 @@ public class ListaDE {
      */
     public void add(Boy boy) throws ListaDeException {
         Boy boyExist = searchidentification(boy.getIdentification());
-        if(boyExist != null)
-        {
+        if (boyExist != null) {
             throw new ListaDeException("La identificacion ya existe");
         }
-        if(this.head == null)
-        {
+        if (this.head == null) {
             head = new Node(boy);
-        }
-        else
-        {
+        } else {
             Node temp = head;
-            while (temp.getNext()!=null)
-            {
+            while (temp.getNext() != null) {
                 temp = temp.getNext();
                 break;
             }
@@ -64,9 +60,9 @@ public class ListaDE {
     /**
      * Parámetros entradas  (Posición y los datos (Infante)
      * <
-     *
+     * <p>
      * Recorrer la lista de principio a fin uno por uno contando la posición en la que estoy parado
-     *
+     * <p>
      * Cuando llegue a la posicion a insertar -1
      * <
      * Creamos Nodo con la información del infante
@@ -106,6 +102,7 @@ public class ListaDE {
 
     /**
      * Metodo para contadopr
+     *
      * @return
      */
     public int count() {
@@ -126,7 +123,7 @@ public class ListaDE {
     /**
      * Metodo que invierte
      * Crear una lista temporal la cabeza de la lista temporal está vacía
-     *
+     * <p>
      * Llamo un ayudante
      * Recorro la lista de principio a fin
      * De cada nodo , se extrae la información y se envía a la otra lista al inicio
@@ -178,13 +175,12 @@ public class ListaDE {
 
     /**
      * Metodp para buscar al infante por identificacion
+     *
      * @param identification
      * @return
-     * @throws ListaDeException
-     *
-     *  se verifica que el condicional de cabeza es igual a null
-     *  luegio la cabeza va acomparar los datos y identificacion e la lista con los de los infantes
-     *  dara la inf
+     * @throws ListaDeException se verifica que el condicional de cabeza es igual a null
+     *                          luegio la cabeza va acomparar los datos y identificacion e la lista con los de los infantes
+     *                          dara la inf
      */
     public Boy searchidentification(String identification) throws ListaDeException {
         if (this.head != null) {
@@ -195,7 +191,7 @@ public class ListaDE {
 
                 /**
                  * el ayudante va a recorrer la lista comaprando la informacion y retiornar el darp
-                  */
+                 */
                 while (temp != null) {
                     if (temp.getData().getIdentification() == identification) {
                         return temp.getData();
@@ -213,6 +209,7 @@ public class ListaDE {
      * Metoodo para listar la gente mayopr de edad
      * haciendo que el temp o ayudante compare la inforamcio de la lisrta con la edad
      * de esta forma se retornarta el valor max
+     *
      * @return
      * @throws ListaDeException
      */
@@ -250,5 +247,45 @@ public class ListaDE {
         throw new ListaDeException("La lista de infantes está vacía");
     }
 
+    public void addNode(Node nodeI) {
+        if (this.head == null) {
+            this.head = nodeI;
+        } else {
+            Node temp = head;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+            }
+            temp.setNext(nodeI);
+            nodeI.setPrevious(temp);
+        }
+
+    }
+
+    public ListaDE listaDEByLocation (Location location) throws  ListaDeException {
+        /**
+         * Se crea una nueva lista para  los nodos
+         */
+        ListaDE listatemp = new ListaDE();
+        /**
+         * Se agarra pone a al ayudante en al cabeza
+         */
+                Node temp = this.head;
+        /**
+         * Se le pone al temporal a llegar al ultimo
+         */
+        while(temp !=null){
+            /**
+             * El temporal extrae los datos y locaciones y los compara
+             */
+                            if (temp.getData().getLocation().equals(location)) {
+                                /**
+                                 * Se agarran los datos y se crea una nueva lista
+                                 */
+                                listatemp.add(temp.getData());
+                            }
+
+                        }
+                        return  listatemp;
+    }
 
 }
