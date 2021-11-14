@@ -1,6 +1,7 @@
 package com.umanizales.lists_prog2.model.listade;
 
 import com.umanizales.lists_prog2.exception.ListaDeException;
+import com.umanizales.lists_prog2.model.Gender1;
 import com.umanizales.lists_prog2.model.Location;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -261,6 +262,12 @@ public class ListaDE {
 
     }
 
+    /**
+     * Creamos  un matodo que nos de una lista por cada localizacion
+     * @param location
+     * @return
+     * @throws ListaDeException
+     */
     public ListaDE listaDEByLocation (Location location) throws  ListaDeException {
         /**
          * Se crea una nueva lista para  los nodos
@@ -287,5 +294,49 @@ public class ListaDE {
                         }
                         return  listatemp;
     }
+    public RhByGrades getGradesRhDTOByGrades(byte grade)throws ListaDeException{
+
+        Node temp = this.head;
+        String rh = " ";
+        int count = 0;
+        while (temp != null){
+            if(temp.getData().getGrade() == grade) {
+                if (!rh.contains(temp.getData().getRh())) {
+                    rh = rh + ", " + temp.getData().getRh();
+                }
+                count++;
+            }
+            temp = temp.getNext();
+        }
+        return new RhByGradesDTO(grade,rh,count);
+    }
+
+    public GradesByGenderDTO getGradesByGenderDTO(Gender1 gender)throws ListaDeException{
+        validateListEmpty();
+        RhByGradesDTO[] rhByGradesDTOS = new RhByGradesDTO[5];
+        for (byte i = 1; i <= 5; i++) {
+            rhByGradesDTOS[i]= getGradesRhDTOByGrades((byte)(i+1));
+        }
+        return new GradesByGenderDTO(gender,rhByGradesDTOS);
+    }
+
+    public GenderByLocationDTO getGenderByLocation(Location location) throws ListaDeException {
+        validateListEmpty();
+        List<GradesByGenderDTO> gradesByGenderDTOS = new ArrayList<>();
+        int count = 0;
+        Node temp = head;
+        while (temp != null){
+            if (temp.getData().getLocation().getCode().equals(location)) {
+                gradesByGenderDTOS.add(getGradesByGenderDTO(temp.getData().getGender()));
+                count++;
+            }
+            temp = temp.getNext();
+        }
+        GenderByLocationDTO genderByLocationDTO = new GenderByLocationDTO(location,gradesByGenderDTOS, count);
+        return genderByLocationDTO;
+    }
+
+
+
 
 }

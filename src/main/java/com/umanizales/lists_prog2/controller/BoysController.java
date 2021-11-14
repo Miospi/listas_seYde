@@ -183,9 +183,18 @@ public class BoysController {
     }
 */
 
-    @GetMapping(path ="lista de locacion")
+    @GetMapping(path ="listadelocacion")
     public ResponseEntity<ResponseDTO> listaDEBy (@RequestBody @Valid ) throws ListaDeException{
         return
     }
+
+    @GetMapping(path = "odenLocation")
+    public ResponseEntity<ResponseDTO> orderLocation() throws ListaDeException
+    { return listaDeService.orderLocation();}
+
+    @GetMapping(path = "boysbygenderlocation")
+    public ResponseEntity<ResponseDTO> getGenderByLocation() throws ListaDeException
+    {return listaDeService.getGenderByLocation();}
+
 }
 

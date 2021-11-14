@@ -54,7 +54,7 @@ public class ListaDeService {
         ListaDE listaTemp = new ListaDE();
         for (Location loc : locations) {
             ListaDE listaLoc = listBoys.listaDEByLocation(loc);
-            if (this.listBoys != null) {
+            if (listaLoc.getHead() != null) {
                 listaTemp.addNode(listBoys.getHead());
             }
         }
@@ -62,9 +62,16 @@ public class ListaDeService {
                 new ResponseDTO("Listado", listaTemp, null),
                 HttpStatus.OK);
     }
+    public ResponseEntity<ResponseDTO> getOrphansByGradeByLocation() throws ListaDeException {
+        List<GradesByLocation> gradeByLocationDTOS = new ArrayList<>();
+        for (Location loc : locations) {
+            gradeByLocationDTOS.add(listBoys.getGenderByLocation()loc));
+        }
+
+        return new ResponseEntity<>(new ResponseDTO("Satisfactorio", gradeByLocationDTOS, null), HttpStatus.OK);
+    }
 
 
 }
 
 
-}

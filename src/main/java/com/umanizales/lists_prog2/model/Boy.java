@@ -36,4 +36,16 @@ public class Boy {
     @Valid
     @NotNull
     private Location location;
+    @NotNull
+    private byte grade;
+    /**
+     * atributo booleano de si es orphan o no
+     */
+    @NotNull
+    private boolean orphan;
+    /**
+     * creamos un atributo string que sea el rh
+     */
+    @NotNull
+    private String rh;
 }
